@@ -4,7 +4,7 @@
   "description": "EasyLogReport is a Typescript library for dealing with log reporting.",
   "main": "build/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --ci",
     "build": "tsc"
   },
   "repository": {
