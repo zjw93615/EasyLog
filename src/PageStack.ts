@@ -1,4 +1,3 @@
-/* 页面堆栈实例 */
 class PageStack {
     private stack!: string[]
     private getCurrentPage: () => string

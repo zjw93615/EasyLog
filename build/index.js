@@ -24,7 +24,7 @@ var EasyLog = /** @class */ (function () {
     /* 埋点上报插件初始化方法 */
     EasyLog.prototype.init = function (cb) {
         var reportCreator = this.reportCreator;
-        var _a = this.reportOptions, sendTimeout = _a.sendTimeout, sendQueueSize = _a.sendQueueSize, singleModel = _a.singleModel, sendFn = _a.sendFn, getCurrentPage = _a.getCurrentPage, sendUrl = _a.sendUrl, sendType = _a.sendType, getInitialEventContent = _a.getInitialEventContent;
+        var _a = this.reportOptions, sendTimeout = _a.sendTimeout, sendQueueSize = _a.sendQueueSize, singleMode = _a.singleMode, sendFn = _a.sendFn, getCurrentPage = _a.getCurrentPage, sendUrl = _a.sendUrl, sendType = _a.sendType, getInitialEventContent = _a.getInitialEventContent;
         this.sender = new Sender({
             sendUrl: sendUrl,
             sendType: sendType,
@@ -33,11 +33,11 @@ var EasyLog = /** @class */ (function () {
         this.queue = new Queue({
             sendTimeout: sendTimeout,
             sendQueueSize: sendQueueSize,
-            singleModel: singleModel,
+            singleMode: singleMode,
             reportCreator: reportCreator,
             sender: this.sender
         });
-        if (!singleModel) {
+        if (!singleMode) {
             this.queue.begin();
         }
         this.stack = new PageStack({ getCurrentPage: getCurrentPage });

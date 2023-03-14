@@ -7,7 +7,7 @@ export interface AppInfo {
 
 export interface SystemInfo {
     ua?: string
-    isCookie?: number // 错误信息
+    isCookie?: number
     cookie?: string
     screenHeight?: number | string
     screenWidth?: number | string
@@ -15,9 +15,9 @@ export interface SystemInfo {
 }
 
 export interface UserInfo {
-    userID?: string // 触发错误的用户
-    userLanguage?: string // 访问网站语言
-    token?: string // 用户token
+    userID?: string
+    userLanguage?: string
+    token?: string
     [key: string]: any
 }
 
@@ -27,34 +27,31 @@ export interface InitialEventContent {
 }
 
 export interface ReportOptions {
-    /* 允许上报的事件类型 */
+    /* log event types that are allowed to be reported */
     acceptEventType?: string[]
 
-    /* 上报函数触发间隔 */
+    /* send function trigger interval(millisecond) */
     sendTimeout?: number
 
-    /* 上报队列最大数量 */
+    /* the maximum number of logs in queue */
     sendQueueSize?: number
 
-    /* 上报url */
+    /* report url */
     sendUrl?: string
 
-    /* 上报模式 */
+    /* reporting mode */
     sendType?: SEND_TYPE
 
-    /**
-     * 是否启动单日志上报模式
-     * 如果启动单日志上报模式，则不会启动上报队列，其余特性不变
-     */
-    singleModel?: boolean
+    /* If it`s singleMode, report log immediately */
+    singleMode?: boolean
 
-    /* 使用方传入的上报方法，参数为待上报队列 */
+    /* custom sendFn, If sendFn is set, sendUrl and sendType would be remove */
     sendFn?: (content: ReportContent) => void
 
-    /* 获取当前页面路由 */
+    /* get current page route */
     getCurrentPage?: () => string
 
-    /* 获取默认上报内容 */
+    /* get the default log content */
     getInitialEventContent?: () => InitialReportContent
 }
 

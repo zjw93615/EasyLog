@@ -13,10 +13,10 @@ var Queue = /** @class */ (function () {
     function Queue(props) {
         this.isConsuming = false;
         this.eventQueue = [];
-        var sendTimeout = props.sendTimeout, sendQueueSize = props.sendQueueSize, singleModel = props.singleModel, reportCreator = props.reportCreator, sender = props.sender;
+        var sendTimeout = props.sendTimeout, sendQueueSize = props.sendQueueSize, singleMode = props.singleMode, reportCreator = props.reportCreator, sender = props.sender;
         this.sendTimeout = sendTimeout;
         this.sendQueueSize = sendQueueSize;
-        this.singleModel = singleModel;
+        this.singleMode = singleMode;
         this.reportCreator = reportCreator;
         this.sender = sender;
     }
@@ -44,7 +44,7 @@ var Queue = /** @class */ (function () {
          * 在单日志上报模式下
          * push方法会直接消费日志
          */
-        if (this.singleModel) {
+        if (this.singleMode) {
             this.eventQueue.push(event);
             this.consume();
             return;

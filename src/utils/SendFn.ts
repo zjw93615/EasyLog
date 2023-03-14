@@ -1,6 +1,7 @@
 // 图片上报
 import {ReportContent} from "../interface";
 
+/* report log by img url function */
 export const sendImage = (data: ReportContent, sendUrl: string)=>{
     let image = new Image();
     image.src = sendUrl + "/" + encodeURIComponent(JSON.stringify(data));
@@ -9,7 +10,7 @@ export const sendImage = (data: ReportContent, sendUrl: string)=>{
     }
 }
 
-// sendBecaon上报
+/* report log by sendBeacon function */
 export const beacon = (data: ReportContent, sendUrl: string)=>{
     console.log('sendUrl', sendUrl, data)
     if (!navigator?.sendBeacon) {

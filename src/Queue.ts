@@ -1,11 +1,10 @@
-/* 队列实例 */
 import {EasyEvent, ReportContent} from "./interface";
 import Sender from "./Sender";
 
 class Queue {
     private isConsuming: boolean = false
     private eventQueue: EasyEvent[] = []
-    private singleModel: boolean | undefined
+    private singleMode: boolean | undefined
     private sendTimeout!: number
     private sendQueueSize!: number
     private sendTimer!: number
@@ -16,18 +15,18 @@ class Queue {
         reportCreator: () => ReportContent
         sendTimeout: number,
         sendQueueSize: number,
-        singleModel: boolean | undefined,
+        singleMode: boolean | undefined,
         sender: Sender,
     }) {
-        const { sendTimeout, sendQueueSize, singleModel, reportCreator, sender } = props
+        const { sendTimeout, sendQueueSize, singleMode, reportCreator, sender } = props
         this.sendTimeout = sendTimeout
         this.sendQueueSize = sendQueueSize
-        this.singleModel = singleModel
+        this.singleMode = singleMode
         this.reportCreator = reportCreator
         this.sender = sender
     }
 
-    /* 队列启动方法 */
+    /* start the queue */
     begin() {
         const sendTimer = setInterval(() => {
             if (this.eventQueue.length > 0) {
@@ -39,27 +38,27 @@ class Queue {
         return sendTimer
     }
 
-    /* 队列终止方法 */
+    /* end the queue */
     end() {
         if (this.sendTimer) {
             clearInterval(this.sendTimer)
         }
     }
 
-    /* 日志推送方法 */
+    /* push log into queue */
     push(event: EasyEvent) {
         /**
-         * 在单日志上报模式下
-         * push方法会直接消费日志
+         * In singleMode
+         * push will consume the log immediately
          */
-        if (this.singleModel) {
+        if (this.singleMode) {
             this.eventQueue.push(event)
             this.consume()
             return
         }
         /**
-         * 当队列长度达到限制长度则先触发消费方法
-         * 触发之后再将新日志推送入队列
+         * If queue length reach the max size
+         * consume the log immediately and then push new log into the queue
          */
         if (this.eventQueue.length >= this.sendQueueSize) {
             this.consume()
@@ -67,7 +66,7 @@ class Queue {
         this.eventQueue.push(event)
     }
 
-    /* 队列消费方法 */
+    /* consume and send logs in the queue and reset queue */
     consume() {
         if (this.isConsuming) return
         this.isConsuming = true

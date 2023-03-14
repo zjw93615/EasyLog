@@ -1,10 +1,8 @@
-/* 每次上报都会默认带上的内容 */
 import {
     EasyEvent,
     InitialEventContent,
     InitialReportContent,
     LOG_LEVEL,
-    SEND_TYPE,
     ReportOptions
 } from "./interface";
 import Queue from "./Queue";
@@ -13,7 +11,7 @@ import Sender from "./Sender";
 import defaultConfig from "./defaultConfig";
 
 let defaultEventContent: InitialReportContent = {}
-/* 埋点插件实例 */
+/* EasyLog Class */
 class EasyLog {
     private reportOptions: ReportOptions
     private queue!: Queue
@@ -27,10 +25,10 @@ class EasyLog {
         }
     }
 
-    /* 埋点上报插件初始化方法 */
+    /* init function */
     init(cb?: () => void) {
         const { reportCreator } = this
-        const { sendTimeout, sendQueueSize, singleModel, sendFn, getCurrentPage, sendUrl, sendType, getInitialEventContent } = this.reportOptions
+        const { sendTimeout, sendQueueSize, singleMode, sendFn, getCurrentPage, sendUrl, sendType, getInitialEventContent } = this.reportOptions
         this.sender = new Sender({
             sendUrl: sendUrl!,
             sendType: sendType!,
@@ -39,11 +37,11 @@ class EasyLog {
         this.queue = new Queue({
             sendTimeout: sendTimeout!,
             sendQueueSize: sendQueueSize!,
-            singleModel: singleModel,
+            singleMode: singleMode,
             reportCreator: reportCreator,
             sender: this.sender
         })
-        if (!singleModel) {
+        if (!singleMode) {
             this.queue.begin()
         }
         this.stack = new PageStack({ getCurrentPage: getCurrentPage! })
@@ -51,12 +49,12 @@ class EasyLog {
         cb && cb()
     }
 
-    /* 埋点上报方法 */
+    /* log method */
     log(event: EasyEvent, logLevel?: LOG_LEVEL) {
         const { eventType } = event
         logLevel = logLevel || LOG_LEVEL.NOTICE
 
-        /* 过滤未在init方法中初始化的事件上报 */
+        /* Filter the log of events that are not initialized in the init method */
         if (this.reportOptions.acceptEventType!.indexOf(eventType) === -1) return console.warn('EasyLog - unregister event')
 
         if (eventType === 'onLoad') {
@@ -77,19 +75,22 @@ class EasyLog {
         this.queue.push(_evnet)
     }
 
+    /* warn method */
     warn(event: EasyEvent) {
         return this.log(event, LOG_LEVEL.WARNING)
     }
 
+    /* error method */
     error(event: EasyEvent) {
         return this.log(event, LOG_LEVEL.ERROR)
     }
 
+    /* debug method */
     debug(event: EasyEvent) {
         return this.log(event, LOG_LEVEL.DEBUG)
     }
 
-    /* 日志生成方法 */
+    /* create default log content */
     reportCreator() {
         return {
             ...defaultEventContent,
@@ -97,27 +98,18 @@ class EasyLog {
         }
     }
 
-    /* 更新队列状态 */
-    updateQueueStatus(status: boolean) {
-        if (status) {
-            return this.queue.begin()
-        }
-        this.queue.end()
-    }
-
-    /* 更新日志默认参数 */
+    /* update default log content */
     updateInitialEventContent(updateContent: InitialEventContent) {
         const { key, value } = updateContent
         // @ts-ignore
         defaultEventContent[key] = value
     }
 
-    /* 查询日志默认参数 */
+    /* get the default log content */
     getInitialEventContent() {
         return defaultEventContent
     }
 }
 
 
-// export LOG_LEVEL;
 export default EasyLog

@@ -2,7 +2,7 @@ var defaultConfig = {
     acceptEventType: ['onLaunch', 'onLoad', 'onUnload', 'onShow', 'request', 'onError', 'click'],
     sendTimeout: 1000 * 5,
     sendQueueSize: 30,
-    singleModel: false,
+    singleMode: false,
     getCurrentPage: function () { return window.location.href; },
     getInitialEventContent: function () {
         return {

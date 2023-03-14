@@ -36,12 +36,8 @@ class Sender {
         }
     }
 
-    /**
-     * 添加消息
-     * @param data 日志内容
-     */
+    /* send logs */
     send(data: ReportContent) {
-        // 上报日志
         this.sendFn(data);
     }
 }

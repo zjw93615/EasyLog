@@ -3,7 +3,7 @@ import Sender from "./Sender";
 declare class Queue {
     private isConsuming;
     private eventQueue;
-    private singleModel;
+    private singleMode;
     private sendTimeout;
     private sendQueueSize;
     private sendTimer;
@@ -13,7 +13,7 @@ declare class Queue {
         reportCreator: () => ReportContent;
         sendTimeout: number;
         sendQueueSize: number;
-        singleModel: boolean | undefined;
+        singleMode: boolean | undefined;
         sender: Sender;
     });
     begin(): number;

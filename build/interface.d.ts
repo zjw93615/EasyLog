@@ -32,7 +32,7 @@ export interface ReportOptions {
      * 是否启动单日志上报模式
      * 如果启动单日志上报模式，则不会启动上报队列，其余特性不变
      */
-    singleModel?: boolean;
+    singleMode?: boolean;
     sendFn?: (content: ReportContent) => void;
     getCurrentPage?: () => string;
     getInitialEventContent?: () => InitialReportContent;
