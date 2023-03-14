@@ -63,15 +63,15 @@ var EasyLogReport = /** @class */ (function () {
     };
     /* warn method */
     EasyLogReport.prototype.warn = function (event) {
-        return this.log(event, LOG_LEVEL.WARNING);
+        this.log(event, LOG_LEVEL.WARNING);
     };
     /* error method */
     EasyLogReport.prototype.error = function (event) {
-        return this.log(event, LOG_LEVEL.ERROR);
+        this.log(event, LOG_LEVEL.ERROR);
     };
     /* debug method */
     EasyLogReport.prototype.debug = function (event) {
-        return this.log(event, LOG_LEVEL.DEBUG);
+        this.log(event, LOG_LEVEL.DEBUG);
     };
     /* create default log content */
     EasyLogReport.prototype.reportCreator = function () {

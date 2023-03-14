@@ -5,8 +5,8 @@ declare class Sender {
     private sendType;
     private sendFn;
     constructor(props: {
-        sendUrl: string;
-        sendType: SEND_TYPE;
+        sendUrl?: string;
+        sendType?: SEND_TYPE;
         sendFn?: (data: ReportContent, sendUrl?: string) => void;
     });
     send(data: ReportContent): void;

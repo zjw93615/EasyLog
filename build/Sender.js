@@ -14,19 +14,22 @@ var Sender = /** @class */ (function () {
         if (typeof sendFn === 'function') {
             this.sendFn = sendFn;
         }
-        else {
+        else if (sendType && this.sendUrl != null) {
             var sendTypeFn_1 = this.strategy[sendType];
             if (!sendTypeFn_1) {
                 console.error("EasyLogReport - no strategy for ".concat(sendType, " type\uFF01Using beacon by default"));
                 this.sendFn = function (data) {
-                    beacon(data, _this.sendUrl);
+                    beacon(data, _this.sendUrl || '');
                 };
             }
             else {
                 this.sendFn = function (data) {
-                    sendTypeFn_1(data, _this.sendUrl);
+                    sendTypeFn_1(data, _this.sendUrl || '');
                 };
             }
+        }
+        else {
+            console.error("EasyLogReport - missing sendFn, sendType or sendUrl");
         }
     }
     /* send logs */
