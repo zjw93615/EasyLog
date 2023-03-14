@@ -13,6 +13,8 @@ npm install easy-log-report --save
 ```
 
 ## Usage
+### Config
+Create your 
 Report log by sendBeacon function
 ```javascript
 import EasyLogReport from 'easy-log-report'
@@ -24,7 +26,7 @@ const easyLogReport = new EasyLogReport({
     sendQueueSize: 30,
     sendUrl: 'http://localhost:8080/api/log/beacon/',
     sendType: SEND_TYPE.BEACON,
-    singleModel: false,
+    singleMode: false,
     getCurrentPage: () => window.location.href,
     getInitialEventContent: () => {
         return {
@@ -62,7 +64,7 @@ const easyLogReport = new EasyLogReport({
         doReportSend(e)
         console.log('EasyLog', e)
     },
-    singleModel: false,
+    singleMode: false,
     getCurrentPage: () => window.location.href,
     getInitialEventContent: () => {
         return {
@@ -86,7 +88,23 @@ const easyLogReport = new EasyLogReport({
     },
 })
 
+easyLogReport.init(() => {
+    console.log('EasyLog init!')
+})
+
 export default easyLogReport
+```
+
+### Record Log
+```javascript
+easyLogReport.log({
+    eventType: 'onLoad',
+    elemId: 'App',
+    extraParams: {
+        // other extra params
+        type: 'onLoad'
+    }
+})
 ```
 
 ## Contributing
