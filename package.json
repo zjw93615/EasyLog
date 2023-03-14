@@ -1,6 +1,6 @@
 {
   "name": "easy-log-report",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "EasyLog is a Typescript library for dealing with log reporting.",
   "main": "build/index.js",
   "scripts": {
