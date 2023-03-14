@@ -28,10 +28,6 @@ export interface ReportOptions {
     sendQueueSize?: number;
     sendUrl?: string;
     sendType?: SEND_TYPE;
-    /**
-     * 是否启动单日志上报模式
-     * 如果启动单日志上报模式，则不会启动上报队列，其余特性不变
-     */
     singleMode?: boolean;
     sendFn?: (content: ReportContent) => void;
     getCurrentPage?: () => string;

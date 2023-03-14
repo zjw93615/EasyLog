@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { EasyEvent, ReportContent } from "./interface";
 import Sender from "./Sender";
 declare class Queue {
@@ -16,7 +17,7 @@ declare class Queue {
         singleMode: boolean | undefined;
         sender: Sender;
     });
-    begin(): number;
+    begin(): NodeJS.Timer;
     end(): void;
     push(event: EasyEvent): void;
     consume(): void;

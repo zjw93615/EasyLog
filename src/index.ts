@@ -11,17 +11,17 @@ import Sender from "./Sender";
 import defaultConfig from "./defaultConfig";
 
 let defaultEventContent: InitialReportContent = {}
-/* EasyLog Class */
-class EasyLog {
+/* EasyLogReport Class */
+class EasyLogReport {
     private reportOptions: ReportOptions
     private queue!: Queue
     private stack!: PageStack
     private sender!: Sender
 
-    constructor (props: ReportOptions) {
+    constructor (props?: ReportOptions) {
         this.reportOptions = {
             ...defaultConfig,
-            ...props
+            ...(props || {})
         }
     }
 
@@ -55,7 +55,7 @@ class EasyLog {
         logLevel = logLevel || LOG_LEVEL.NOTICE
 
         /* Filter the log of events that are not initialized in the init method */
-        if (this.reportOptions.acceptEventType!.indexOf(eventType) === -1) return console.warn('EasyLog - unregister event')
+        if (this.reportOptions.acceptEventType!.indexOf(eventType) === -1) return console.warn('EasyLogReport - unregister event')
 
         if (eventType === 'onLoad') {
             this.stack.push()
@@ -77,17 +77,17 @@ class EasyLog {
 
     /* warn method */
     warn(event: EasyEvent) {
-        return this.log(event, LOG_LEVEL.WARNING)
+        this.log(event, LOG_LEVEL.WARNING)
     }
 
     /* error method */
     error(event: EasyEvent) {
-        return this.log(event, LOG_LEVEL.ERROR)
+        this.log(event, LOG_LEVEL.ERROR)
     }
 
     /* debug method */
     debug(event: EasyEvent) {
-        return this.log(event, LOG_LEVEL.DEBUG)
+        this.log(event, LOG_LEVEL.DEBUG)
     }
 
     /* create default log content */
@@ -112,4 +112,4 @@ class EasyLog {
 }
 
 
-export default EasyLog
+export default EasyLogReport

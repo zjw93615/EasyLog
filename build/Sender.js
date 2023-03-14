@@ -17,7 +17,7 @@ var Sender = /** @class */ (function () {
         else {
             var sendTypeFn_1 = this.strategy[sendType];
             if (!sendTypeFn_1) {
-                console.error("Easylog - no strategy for ".concat(sendType, " type\uFF01Using beacon by default"));
+                console.error("EasyLogReport - no strategy for ".concat(sendType, " type\uFF01Using beacon by default"));
                 this.sendFn = function (data) {
                     beacon(data, _this.sendUrl);
                 };
@@ -29,12 +29,8 @@ var Sender = /** @class */ (function () {
             }
         }
     }
-    /**
-     * 添加消息
-     * @param data 日志内容
-     */
+    /* send logs */
     Sender.prototype.send = function (data) {
-        // 上报日志
         this.sendFn(data);
     };
     return Sender;

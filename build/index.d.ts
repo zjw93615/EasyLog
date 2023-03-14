@@ -1,10 +1,10 @@
 import { EasyEvent, InitialEventContent, InitialReportContent, LOG_LEVEL, ReportOptions } from "./interface";
-declare class EasyLog {
+declare class EasyLogReport {
     private reportOptions;
     private queue;
     private stack;
     private sender;
-    constructor(props: ReportOptions);
+    constructor(props?: ReportOptions);
     init(cb?: () => void): void;
     log(event: EasyEvent, logLevel?: LOG_LEVEL): void;
     warn(event: EasyEvent): void;
@@ -16,8 +16,7 @@ declare class EasyLog {
         systemInfo?: import("./interface").SystemInfo | undefined;
         userInfo?: import("./interface").UserInfo | undefined;
     };
-    updateQueueStatus(status: boolean): number | undefined;
     updateInitialEventContent(updateContent: InitialEventContent): void;
     getInitialEventContent(): InitialReportContent;
 }
-export default EasyLog;
+export default EasyLogReport;

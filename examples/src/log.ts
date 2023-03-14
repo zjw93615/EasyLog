@@ -6,7 +6,7 @@ const easyLogReport = new EasyLogReport({
     sendQueueSize: 30,
     sendFn: e => {
         // doReportSend(e)
-        console.log('EasyLog', e)
+        console.log('EasyLogReport', e)
     },
     singleMode: false,
     getCurrentPage: () => window.location.href,

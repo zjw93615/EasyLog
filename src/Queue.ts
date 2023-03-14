@@ -7,7 +7,7 @@ class Queue {
     private singleMode: boolean | undefined
     private sendTimeout!: number
     private sendQueueSize!: number
-    private sendTimer!: number
+    private sendTimer!: NodeJS.Timer
     private reportCreator!: () => ReportContent
     private sender!: Sender
 

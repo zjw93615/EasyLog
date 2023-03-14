@@ -5,7 +5,7 @@ import App from './App';
 import easyLogReport from "./log";
 
 easyLogReport.init(() => {
-    console.log('EasyLog init!')
+    console.log('EasyLogReport init!')
 })
 
 const root = ReactDOM.createRoot(

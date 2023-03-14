@@ -20,7 +20,7 @@ var Queue = /** @class */ (function () {
         this.reportCreator = reportCreator;
         this.sender = sender;
     }
-    /* 队列启动方法 */
+    /* start the queue */
     Queue.prototype.begin = function () {
         var _this = this;
         var sendTimer = setInterval(function () {
@@ -32,17 +32,17 @@ var Queue = /** @class */ (function () {
         this.sendTimer = sendTimer;
         return sendTimer;
     };
-    /* 队列终止方法 */
+    /* end the queue */
     Queue.prototype.end = function () {
         if (this.sendTimer) {
             clearInterval(this.sendTimer);
         }
     };
-    /* 日志推送方法 */
+    /* push log into queue */
     Queue.prototype.push = function (event) {
         /**
-         * 在单日志上报模式下
-         * push方法会直接消费日志
+         * In singleMode
+         * push will consume the log immediately
          */
         if (this.singleMode) {
             this.eventQueue.push(event);
@@ -50,15 +50,15 @@ var Queue = /** @class */ (function () {
             return;
         }
         /**
-         * 当队列长度达到限制长度则先触发消费方法
-         * 触发之后再将新日志推送入队列
+         * If queue length reach the max size
+         * consume the log immediately and then push new log into the queue
          */
         if (this.eventQueue.length >= this.sendQueueSize) {
             this.consume();
         }
         this.eventQueue.push(event);
     };
-    /* 队列消费方法 */
+    /* consume and send logs in the queue and reset queue */
     Queue.prototype.consume = function () {
         if (this.isConsuming)
             return;

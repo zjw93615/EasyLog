@@ -9,10 +9,6 @@ declare class Sender {
         sendType: SEND_TYPE;
         sendFn?: (data: ReportContent, sendUrl?: string) => void;
     });
-    /**
-     * 添加消息
-     * @param data 日志内容
-     */
     send(data: ReportContent): void;
 }
 export default Sender;

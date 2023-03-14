@@ -4,3 +4,4 @@ examples
 .idea
 node_modules
 npm-debug.log
+tests

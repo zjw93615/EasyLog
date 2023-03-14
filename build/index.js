@@ -9,20 +9,19 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-/* 每次上报都会默认带上的内容 */
 import { LOG_LEVEL } from "./interface";
 import Queue from "./Queue";
 import PageStack from "./PageStack";
 import Sender from "./Sender";
 import defaultConfig from "./defaultConfig";
 var defaultEventContent = {};
-/* 埋点插件实例 */
-var EasyLog = /** @class */ (function () {
-    function EasyLog(props) {
-        this.reportOptions = __assign(__assign({}, defaultConfig), props);
+/* EasyLogReport Class */
+var EasyLogReport = /** @class */ (function () {
+    function EasyLogReport(props) {
+        this.reportOptions = __assign(__assign({}, defaultConfig), (props || {}));
     }
-    /* 埋点上报插件初始化方法 */
-    EasyLog.prototype.init = function (cb) {
+    /* init function */
+    EasyLogReport.prototype.init = function (cb) {
         var reportCreator = this.reportCreator;
         var _a = this.reportOptions, sendTimeout = _a.sendTimeout, sendQueueSize = _a.sendQueueSize, singleMode = _a.singleMode, sendFn = _a.sendFn, getCurrentPage = _a.getCurrentPage, sendUrl = _a.sendUrl, sendType = _a.sendType, getInitialEventContent = _a.getInitialEventContent;
         this.sender = new Sender({
@@ -44,13 +43,13 @@ var EasyLog = /** @class */ (function () {
         defaultEventContent = getInitialEventContent ? getInitialEventContent() : {};
         cb && cb();
     };
-    /* 埋点上报方法 */
-    EasyLog.prototype.log = function (event, logLevel) {
+    /* log method */
+    EasyLogReport.prototype.log = function (event, logLevel) {
         var eventType = event.eventType;
         logLevel = logLevel || LOG_LEVEL.NOTICE;
-        /* 过滤未在init方法中初始化的事件上报 */
+        /* Filter the log of events that are not initialized in the init method */
         if (this.reportOptions.acceptEventType.indexOf(eventType) === -1)
-            return console.warn('EasyLog - unregister event');
+            return console.warn('EasyLogReport - unregister event');
         if (eventType === 'onLoad') {
             this.stack.push();
         }
@@ -62,37 +61,32 @@ var EasyLog = /** @class */ (function () {
             _evnet.createTime = String(Date.now());
         this.queue.push(_evnet);
     };
-    EasyLog.prototype.warn = function (event) {
+    /* warn method */
+    EasyLogReport.prototype.warn = function (event) {
         return this.log(event, LOG_LEVEL.WARNING);
     };
-    EasyLog.prototype.error = function (event) {
+    /* error method */
+    EasyLogReport.prototype.error = function (event) {
         return this.log(event, LOG_LEVEL.ERROR);
     };
-    EasyLog.prototype.debug = function (event) {
+    /* debug method */
+    EasyLogReport.prototype.debug = function (event) {
         return this.log(event, LOG_LEVEL.DEBUG);
     };
-    /* 日志生成方法 */
-    EasyLog.prototype.reportCreator = function () {
+    /* create default log content */
+    EasyLogReport.prototype.reportCreator = function () {
         return __assign(__assign({}, defaultEventContent), { reportTime: String(Date.now()) });
     };
-    /* 更新队列状态 */
-    EasyLog.prototype.updateQueueStatus = function (status) {
-        if (status) {
-            return this.queue.begin();
-        }
-        this.queue.end();
-    };
-    /* 更新日志默认参数 */
-    EasyLog.prototype.updateInitialEventContent = function (updateContent) {
+    /* update default log content */
+    EasyLogReport.prototype.updateInitialEventContent = function (updateContent) {
         var key = updateContent.key, value = updateContent.value;
         // @ts-ignore
         defaultEventContent[key] = value;
     };
-    /* 查询日志默认参数 */
-    EasyLog.prototype.getInitialEventContent = function () {
+    /* get the default log content */
+    EasyLogReport.prototype.getInitialEventContent = function () {
         return defaultEventContent;
     };
-    return EasyLog;
+    return EasyLogReport;
 }());
-// export LOG_LEVEL;
-export default EasyLog;
+export default EasyLogReport;

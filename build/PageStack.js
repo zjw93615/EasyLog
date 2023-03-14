@@ -1,4 +1,3 @@
-/* 页面堆栈实例 */
 var PageStack = /** @class */ (function () {
     function PageStack(props) {
         var getCurrentPage = props.getCurrentPage;

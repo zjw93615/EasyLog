@@ -1,6 +1,6 @@
-# EasyLog
+# EasyLogReport
 
-EasyLog is a Typescript library for dealing with log reporting.
+EasyLogReport is a Typescript library for dealing with log reporting.
 
 ## Installation
 
@@ -62,7 +62,7 @@ const easyLogReport = new EasyLogReport({
     sendQueueSize: 30,
     sendFn: e => {
         doReportSend(e)
-        console.log('EasyLog', e)
+        console.log('EasyLogReport', e)
     },
     singleMode: false,
     getCurrentPage: () => window.location.href,
@@ -89,7 +89,7 @@ const easyLogReport = new EasyLogReport({
 })
 
 easyLogReport.init(() => {
-    console.log('EasyLog init!')
+    console.log('EasyLogReport init!')
 })
 
 export default easyLogReport
