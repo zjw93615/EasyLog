@@ -12,7 +12,6 @@ export const sendImage = (data: ReportContent, sendUrl: string)=>{
 
 /* report log by sendBeacon function */
 export const beacon = (data: ReportContent, sendUrl: string)=>{
-    console.log('sendUrl', sendUrl, data)
     if (!navigator?.sendBeacon) {
         console.error('EasyLogReport - current env don\'t support sendBeacon!')
         return

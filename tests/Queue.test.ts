@@ -141,4 +141,38 @@ describe('Check Queue Class', () => {
         expect(queueConsumeSpy).toHaveBeenCalledTimes(1);
         expect(sendFn).toHaveBeenCalledTimes(1);
     });
+
+    it('reach sendQueueSize', () => {
+        const queueConsumeSpy = jest.spyOn(Queue.prototype, 'consume');
+        const sendFn = jest.fn();
+        const sender = new Sender({
+            sendFn,
+        });
+        const queue = new Queue({
+            sendInterval: 100,
+            sendQueueSize: 2,
+            singleMode: false,
+            reportCreator: () => {return {}},
+            sender,
+        })
+        queue.begin()
+        queue.push({
+            eventType: 'onLoad'
+        })
+
+        // Equivalent to above check:
+        expect(queueConsumeSpy).toHaveBeenCalledTimes(0);
+        queue.push({
+            eventType: 'onLoad'
+        })
+        queue.push({
+            eventType: 'onLoad'
+        })
+
+        // Equivalent to above check:
+        expect(queueConsumeSpy).toHaveBeenCalledTimes(1);
+        jest.advanceTimersByTime(100);
+        expect(queueConsumeSpy).toHaveBeenCalledTimes(2);
+        expect(sendFn).toHaveBeenCalledTimes(2);
+    });
 });

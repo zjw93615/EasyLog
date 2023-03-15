@@ -67,7 +67,7 @@ class EasyLogReport {
             path: this.stack.getCurrentStack()
         }
 
-        if (eventType === 'onUnLoad') {
+        if (eventType === 'onUnload') {
             this.stack.pop()
         }
 

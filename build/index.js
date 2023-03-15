@@ -54,7 +54,7 @@ var EasyLogReport = /** @class */ (function () {
             this.stack.push();
         }
         var _evnet = __assign(__assign({}, event), { logLevel: logLevel, path: this.stack.getCurrentStack() });
-        if (eventType === 'onUnLoad') {
+        if (eventType === 'onUnload') {
             this.stack.pop();
         }
         if (!_evnet.createTime)

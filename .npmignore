@@ -8,3 +8,4 @@ tests
 .travis.yml
 jest.config.js
 tsconfig.json
+coverage

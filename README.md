@@ -1,6 +1,7 @@
 # EasyLogReport
 [![npm](https://img.shields.io/npm/v/easy-log-report.svg)](https://www.npmjs.com/package/easy-log-report)
 [![CI](https://github.com/zjw93615/EasyLog/actions/workflows/npmjs.yml/badge.svg?event=release)](https://github.com/zjw93615/EasyLog/actions/workflows/npmjs.yml)
+[![Coverage Status](https://coveralls.io/repos/github/zjw93615/EasyLog/badge.svg?branch=master)](https://coveralls.io/github/zjw93615/EasyLog?branch=master)
 
 
 EasyLogReport is a Typescript library for dealing with log reporting.

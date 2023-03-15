@@ -1,13 +1,20 @@
 import EasyLogReport from "../src/index";
-import {EasyEvent, InitialEventContent} from "../build/interface";
+import Queue from "../src/Queue";
+import PageStack from "../src/PageStack";
+import {EasyEvent, InitialEventContent} from "../src/interface";
 import {InitialReportContent, LOG_LEVEL} from "../src/interface";
 jest.useFakeTimers();
 jest.setSystemTime(new Date('2023-01-01'));
+jest.mock('../src/Queue');
+jest.mock('../src/PageStack');
 
 describe('Check EasyLogReport Class', () => {
     afterEach(() => {
         jest.clearAllMocks();
+        (PageStack as any as jest.Mock).mockClear();
+        (Queue as any as jest.Mock).mockClear();
     });
+
     it('init method', () => {
         const EasyLogReportInitSpy = jest.spyOn(EasyLogReport.prototype, 'init')
         const easyLogReport = new EasyLogReport({
@@ -16,6 +23,18 @@ describe('Check EasyLogReport Class', () => {
                 return {}
             }
         });
+
+        const cb = () => {}
+        easyLogReport.init(cb);
+
+        // Equivalent to above check:
+        expect(EasyLogReportInitSpy).toHaveBeenCalledWith(cb);
+        expect(EasyLogReportInitSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('empty constructor method', () => {
+        const EasyLogReportInitSpy = jest.spyOn(EasyLogReport.prototype, 'init')
+        const easyLogReport = new EasyLogReport();
 
         const cb = () => {}
         easyLogReport.init(cb);
@@ -222,6 +241,57 @@ describe('Check EasyLogReport Class', () => {
             }
         }
         expect(temp).toStrictEqual(result)
+    });
+
+    it('log unregister event', () => {
+        const EasyLogReportLogSpy = jest.spyOn(EasyLogReport.prototype, 'log')
+        const easyLogReport = new EasyLogReport();
+
+        const cb = () => {}
+        easyLogReport.init(cb);
+        const event: EasyEvent = {
+            eventType: 'otherEvent'
+        }
+        easyLogReport.log(event)
+
+        // Equivalent to above check:
+        const pageStackInstance =( PageStack as any as jest.Mock).mock.instances[0];
+        const pageStackPush = pageStackInstance.push
+        expect(pageStackPush).toHaveBeenCalledTimes(0);
+    });
+
+    it('onLoad event', () => {
+        const EasyLogReportLogSpy = jest.spyOn(EasyLogReport.prototype, 'log')
+        const easyLogReport = new EasyLogReport();
+
+        const cb = () => {}
+        easyLogReport.init(cb);
+        const event: EasyEvent = {
+            eventType: 'onLoad'
+        }
+        easyLogReport.log(event)
+
+        // Equivalent to above check:
+        const pageStackInstance =( PageStack as any as jest.Mock).mock.instances[0];
+        const pageStackPush = pageStackInstance.push
+        expect(pageStackPush).toHaveBeenCalledTimes(1);
+    });
+
+    it('onUnload event', () => {
+        const EasyLogReportLogSpy = jest.spyOn(EasyLogReport.prototype, 'log')
+        const easyLogReport = new EasyLogReport();
+
+        const cb = () => {}
+        easyLogReport.init(cb);
+        const event: EasyEvent = {
+            eventType: 'onUnload'
+        }
+        easyLogReport.log(event)
+
+        // Equivalent to above check:
+        const pageStackInstance =( PageStack as any as jest.Mock).mock.instances[0];
+        const pageStackPop = pageStackInstance.pop
+        expect(pageStackPop).toHaveBeenCalledTimes(1);
     });
 })
 

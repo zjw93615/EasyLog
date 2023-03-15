@@ -59,4 +59,31 @@ describe('Check Sender Class', () => {
         expect(sendFn).toHaveBeenCalledTimes(1);
         expect(sendFn).toHaveBeenLastCalledWith(data)
     });
+
+    it('no strategy for sendType', () => {
+        const sendFn = jest.fn();
+        const temp = {
+            sendUrl: 'localhost',
+            sendType: 'none' as SEND_TYPE
+        };
+        const sender = new Sender(temp);
+        const data = {
+            reportTime: String(Date.now())
+        }
+        sender.send(data)
+        expect(beacon).toHaveBeenCalledTimes(1);
+        expect(beacon).toHaveBeenLastCalledWith(data, 'localhost')
+    });
+
+    it('missing sendFn, sendType or sendUrl', () => {
+        const sendFn = jest.fn();
+        const temp = {};
+        const sender = new Sender(temp);
+        const data = {
+            reportTime: String(Date.now())
+        }
+        sender.send(data)
+        expect(beacon).toHaveBeenCalledTimes(1);
+        expect(beacon).toHaveBeenLastCalledWith(data, '')
+    });
 });
