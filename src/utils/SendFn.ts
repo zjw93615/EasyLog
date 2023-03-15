@@ -1,4 +1,3 @@
-// 图片上报
 import {ReportContent} from "../interface";
 
 /* report log by img url function */
