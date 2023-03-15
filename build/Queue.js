@@ -13,8 +13,8 @@ var Queue = /** @class */ (function () {
     function Queue(props) {
         this.isConsuming = false;
         this.eventQueue = [];
-        var sendTimeout = props.sendTimeout, sendQueueSize = props.sendQueueSize, singleMode = props.singleMode, reportCreator = props.reportCreator, sender = props.sender;
-        this.sendTimeout = sendTimeout;
+        var sendInterval = props.sendInterval, sendQueueSize = props.sendQueueSize, singleMode = props.singleMode, reportCreator = props.reportCreator, sender = props.sender;
+        this.sendInterval = sendInterval;
         this.sendQueueSize = sendQueueSize;
         this.singleMode = singleMode;
         this.reportCreator = reportCreator;
@@ -28,7 +28,7 @@ var Queue = /** @class */ (function () {
                 _this.consume();
             }
             return;
-        }, this.sendTimeout);
+        }, this.sendInterval);
         this.sendTimer = sendTimer;
         return sendTimer;
     };

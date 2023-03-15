@@ -28,14 +28,14 @@ class EasyLogReport {
     /* init function */
     init(cb?: () => void) {
         const { reportCreator } = this
-        const { sendTimeout, sendQueueSize, singleMode, sendFn, getCurrentPage, sendUrl, sendType, getInitialEventContent } = this.reportOptions
+        const { sendInterval, sendQueueSize, singleMode, sendFn, getCurrentPage, sendUrl, sendType, getInitialEventContent } = this.reportOptions
         this.sender = new Sender({
             sendUrl: sendUrl!,
             sendType: sendType!,
             sendFn: sendFn,
         })
         this.queue = new Queue({
-            sendTimeout: sendTimeout!,
+            sendInterval: sendInterval!,
             sendQueueSize: sendQueueSize!,
             singleMode: singleMode,
             reportCreator: reportCreator,

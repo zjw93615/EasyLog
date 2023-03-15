@@ -24,7 +24,7 @@ export interface InitialEventContent {
 }
 export interface ReportOptions {
     acceptEventType?: string[];
-    sendTimeout?: number;
+    sendInterval?: number;
     sendQueueSize?: number;
     sendUrl?: string;
     sendType?: SEND_TYPE;

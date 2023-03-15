@@ -5,7 +5,7 @@ class Queue {
     private isConsuming: boolean = false
     private eventQueue: EasyEvent[] = []
     private singleMode: boolean | undefined
-    private sendTimeout!: number
+    private sendInterval!: number
     private sendQueueSize!: number
     private sendTimer!: NodeJS.Timer
     private reportCreator!: () => ReportContent
@@ -13,13 +13,13 @@ class Queue {
 
     constructor (props: {
         reportCreator: () => ReportContent
-        sendTimeout: number,
+        sendInterval: number,
         sendQueueSize: number,
         singleMode: boolean | undefined,
         sender: Sender,
     }) {
-        const { sendTimeout, sendQueueSize, singleMode, reportCreator, sender } = props
-        this.sendTimeout = sendTimeout
+        const { sendInterval, sendQueueSize, singleMode, reportCreator, sender } = props
+        this.sendInterval = sendInterval
         this.sendQueueSize = sendQueueSize
         this.singleMode = singleMode
         this.reportCreator = reportCreator
@@ -33,7 +33,7 @@ class Queue {
                 this.consume()
             }
             return
-        }, this.sendTimeout)
+        }, this.sendInterval)
         this.sendTimer = sendTimer;
         return sendTimer
     }

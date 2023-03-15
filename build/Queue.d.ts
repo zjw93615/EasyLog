@@ -5,14 +5,14 @@ declare class Queue {
     private isConsuming;
     private eventQueue;
     private singleMode;
-    private sendTimeout;
+    private sendInterval;
     private sendQueueSize;
     private sendTimer;
     private reportCreator;
     private sender;
     constructor(props: {
         reportCreator: () => ReportContent;
-        sendTimeout: number;
+        sendInterval: number;
         sendQueueSize: number;
         singleMode: boolean | undefined;
         sender: Sender;

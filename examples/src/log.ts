@@ -2,7 +2,7 @@ import EasyLogReport from 'easy-log-report'
 
 const easyLogReport = new EasyLogReport({
     acceptEventType: ['onLaunch', 'onLoad', 'onUnload', 'onShow', 'request', 'onError', 'click'],
-    sendTimeout: 1000 * 30,
+    sendInterval: 1000 * 30,
     sendQueueSize: 30,
     sendFn: e => {
         // doReportSend(e)

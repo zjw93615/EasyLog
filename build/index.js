@@ -23,14 +23,14 @@ var EasyLogReport = /** @class */ (function () {
     /* init function */
     EasyLogReport.prototype.init = function (cb) {
         var reportCreator = this.reportCreator;
-        var _a = this.reportOptions, sendTimeout = _a.sendTimeout, sendQueueSize = _a.sendQueueSize, singleMode = _a.singleMode, sendFn = _a.sendFn, getCurrentPage = _a.getCurrentPage, sendUrl = _a.sendUrl, sendType = _a.sendType, getInitialEventContent = _a.getInitialEventContent;
+        var _a = this.reportOptions, sendInterval = _a.sendInterval, sendQueueSize = _a.sendQueueSize, singleMode = _a.singleMode, sendFn = _a.sendFn, getCurrentPage = _a.getCurrentPage, sendUrl = _a.sendUrl, sendType = _a.sendType, getInitialEventContent = _a.getInitialEventContent;
         this.sender = new Sender({
             sendUrl: sendUrl,
             sendType: sendType,
             sendFn: sendFn,
         });
         this.queue = new Queue({
-            sendTimeout: sendTimeout,
+            sendInterval: sendInterval,
             sendQueueSize: sendQueueSize,
             singleMode: singleMode,
             reportCreator: reportCreator,

@@ -15,7 +15,7 @@ describe('Check Queue Class', () => {
             sendFn,
         });
         const queue = new Queue({
-            sendTimeout: 100,
+            sendInterval: 100,
             sendQueueSize: 10,
             singleMode: false,
             reportCreator: () => {return {}},
@@ -47,7 +47,7 @@ describe('Check Queue Class', () => {
             sendFn,
         });
         const queue = new Queue({
-            sendTimeout: 100,
+            sendInterval: 100,
             sendQueueSize: 10,
             singleMode: false,
             reportCreator: () => {return {}},
@@ -79,7 +79,7 @@ describe('Check Queue Class', () => {
             sendFn,
         });
         const queue = new Queue({
-            sendTimeout: 100,
+            sendInterval: 100,
             sendQueueSize: 10,
             singleMode: false,
             reportCreator: () => {return {}},
@@ -101,7 +101,7 @@ describe('Check Queue Class', () => {
             sendFn,
         });
         const queue = new Queue({
-            sendTimeout: 100,
+            sendInterval: 100,
             sendQueueSize: 10,
             singleMode: true,
             reportCreator: () => {return {}},
@@ -124,7 +124,7 @@ describe('Check Queue Class', () => {
             sendFn,
         });
         const queue = new Queue({
-            sendTimeout: 100,
+            sendInterval: 100,
             sendQueueSize: 10,
             singleMode: false,
             reportCreator: () => {return {}},

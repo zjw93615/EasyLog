@@ -13,7 +13,7 @@ npm install easy-log-report --save
 ```
 
 ## Usage
-### Config
+### Config and Init
 Create your 
 Report log by sendBeacon function
 ```javascript
@@ -22,7 +22,7 @@ import { SEND_TYPE } from 'easy-log/build/interface'
 
 const easyLogReport = new EasyLogReport({
     acceptEventType: ['onLaunch', 'onLoad', 'onUnload', 'onShow', 'request', 'onError', 'click'],
-    sendTimeout: 1000 * 30,
+    sendInterval: 1000 * 30,
     sendQueueSize: 30,
     sendUrl: 'http://localhost:8080/api/log/beacon/',
     sendType: SEND_TYPE.BEACON,
@@ -58,7 +58,7 @@ import EasyLogReport from 'easy-log-report'
 
 const easyLogReport = new EasyLogReport({
     acceptEventType: ['onLaunch', 'onLoad', 'onUnload', 'onShow', 'request', 'onError', 'click'],
-    sendTimeout: 1000 * 30,
+    sendInterval: 1000 * 30,
     sendQueueSize: 30,
     sendFn: e => {
         doReportSend(e)
@@ -106,6 +106,19 @@ easyLogReport.log({
     }
 })
 ```
+## Config Props
+|  Property   | Description  | Type | Default |
+|  ----  | ----  | ---- | ---- |
+| acceptEventType  | log event types that are allowed to be reported | string[] | ['onLaunch', 'onLoad', 'onUnload', 'onShow', 'request', 'onError', 'click'] |
+| sendInterval  | send function trigger interval(millisecond) | number | 1000 * 30 |
+| sendQueueSize  | the maximum number of logs in queue | number | 50 |
+| singleMode | If it`s singleMode, report log immediately | boolean | false |
+| sendUrl  | report url | number | - |
+| sendType  | reporting mode | SEND_TYPE.IMG / SEND_TYPE.BEACON | - |
+| sendFn  | custom sendFn, If sendFn is set, sendUrl and sendType would be remove | (content: ReportContent) => void | - |
+| getCurrentPage  | get current page route | () => string | - |
+| getInitialEventContent  | get the default log content | () => InitialReportContent | - |
+
 
 ## Contributing
 

@@ -31,7 +31,7 @@ export interface ReportOptions {
     acceptEventType?: string[]
 
     /* send function trigger interval(millisecond) */
-    sendTimeout?: number
+    sendInterval?: number
 
     /* the maximum number of logs in queue */
     sendQueueSize?: number
