@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zjw93615/EasyLogReport"
+    "url": "https://github.com/zjw93615/EasyLog"
   },
-  "bugs": "https://github.com/zjw93615/EasyLogReport/issues",
+  "bugs": "https://github.com/zjw93615/EasyLog/issues",
   "keywords": [
     "log"
   ],
