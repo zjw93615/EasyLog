@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --ci",
     "build": "tsc",
-    "coveralls": "jest --coverage && coveralls < coverage/lcov.info"
+    "coveralls": "jest --coverage"
   },
   "repository": {
     "type": "git",
