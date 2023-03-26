@@ -36,7 +36,7 @@ class Sender {
         }else {
             console.error(`EasyLogReport - missing sendFn, sendType or sendUrl`)
             this.sendFn = (data: ReportContent) => {
-                beacon(data, this.sendUrl || '')
+                console.error(`EasyLogReport - missing sendFn, sendType or sendUrl`)
             }
         }
     }
