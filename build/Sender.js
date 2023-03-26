@@ -30,6 +30,9 @@ var Sender = /** @class */ (function () {
         }
         else {
             console.error("EasyLogReport - missing sendFn, sendType or sendUrl");
+            this.sendFn = function (data) {
+                console.error("EasyLogReport - missing sendFn, sendType or sendUrl");
+            };
         }
     }
     /* send logs */

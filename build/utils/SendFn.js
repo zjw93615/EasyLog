@@ -8,7 +8,6 @@ export var sendImage = function (data, sendUrl) {
 };
 /* report log by sendBeacon function */
 export var beacon = function (data, sendUrl) {
-    console.log('sendUrl', sendUrl, data);
     if (!(navigator === null || navigator === void 0 ? void 0 : navigator.sendBeacon)) {
         console.error('EasyLogReport - current env don\'t support sendBeacon!');
         return;
