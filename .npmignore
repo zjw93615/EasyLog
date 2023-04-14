@@ -9,3 +9,6 @@ tests
 jest.config.js
 tsconfig.json
 coverage
+.github
+gulpfile.js
+webpack.config.js

@@ -22,7 +22,7 @@ Create your
 Report log by sendBeacon function
 ```javascript
 import EasyLogReport from 'easy-log-report'
-import { SEND_TYPE } from 'easy-log/build/interface'
+import { SEND_TYPE } from 'easy-log-report/build/interface'
 
 const easyLogReport = new EasyLogReport({
     acceptEventType: ['onLaunch', 'onLoad', 'onUnload', 'onShow', 'request', 'onError', 'click'],
